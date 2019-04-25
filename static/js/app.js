@@ -42,8 +42,9 @@ function filter() {
   console.log(filteredData);
 
   // Clear table
-  tbody.selectAll("td").remove()
-  tbody.selectAll("tr").remove()
+  // tbody.selectAll("td").remove()
+  // tbody.selectAll("tr").remove()
+  tbody.html('')
   
   // Recreate table using function
   filteredData.forEach(createTable);
