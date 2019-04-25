@@ -12,7 +12,7 @@ function createTable (ufoSighting) {
   // Use d3 to append 1 cell per ufo sighting value
   Object.entries(ufoSighting).forEach(([key, value]) => {
     // Append a cell to the row for each value in the object
-    var cell = tbody.append("td");
+    var cell = row.append("td");
     cell.text(value);
   });
 };
