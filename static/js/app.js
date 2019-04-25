@@ -23,12 +23,17 @@ var inputField = d3.select("#datetime");
 
 // Define filter function to trigger when the button is clicked
 function filter() {
-  console.log("A button was clicked!");
+  // Prevent the page from refreshing
+  d3.event.preventDefault();
 
   // Use d3 to see the object that dispatched the event
   console.log(d3.event.target);
+
+  var date = inputField.node().value;
+  console.log(date);
 }
 
 
-// Attach an event to the filter function
+// Attach events to the filter function
 button.on("click", filter);
+// inputField.on("change", filter);
