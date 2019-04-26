@@ -38,8 +38,37 @@ function filter() {
   else {
     var filteredData = tableData.filter(ufo => ufo.datetime === inputValue);
   }
+
+  // Level 2: Multiple Search Categories (Optional)
+  // Note for refactoring: consider converting this to function for DRY reasons
+  // Simple function would be used multiple times (nested). 
+  // Dynamic function would take array as input and loop.
+  var inputCityValue = d3.select("#city").property("value");
+  if (inputCityValue === '') {
+    filteredCity = filteredData;
+  }
+  else {
+    var filteredCity = filteredData.filter(ufo => ufo.city.toLowerCase() === inputCityValue.toLowerCase());
+  }
+
+  var inputStateValue = d3.select("#state").property("value");
+  if (inputStateValue === '') {
+    filteredState = filteredCity;
+  }
+  else {
+    var filteredState = filteredCity.filter(ufo => ufo.state.toLowerCase() === inputStateValue.toLowerCase());
+  }
+
+  var inputCountryValue = d3.select("#country").property("value");
+  if (inputCountryValue === '') {
+    filteredCountry = filteredState;
+  }
+  else {
+    var filteredCountry = filteredState.filter(ufo => ufo.country.toLowerCase() === inputCountryValue.toLowerCase());
+  }
+
   
-  console.log(filteredData);
+  console.log(filteredCountry);
 
   // Clear table
   // tbody.selectAll("td").remove()
@@ -47,7 +76,7 @@ function filter() {
   tbody.html('')
   
   // Recreate table using function
-  filteredData.forEach(createTable);
+  filteredCountry.forEach(createTable);
 };
 
 // Getting a reference to the button on the page with the id property set to `filter-btn`
@@ -55,3 +84,5 @@ var button = d3.select("#filter-btn");
 
 // Attach events to the filter function
 button.on("click", filter);
+
+// Consider adding a button to clear all filters
